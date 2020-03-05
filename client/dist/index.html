@@ -189,6 +189,11 @@
 				return;
 			}
 
+			if (!$("#description-input").val()) {
+				alert('Por favor deixe um comentário sobre o evento"');
+				return;
+			}
+
 			var name = $("#name-input").val();
 			var rate = $("#rate-input").val();
 			var email = $("#email-input").val();
