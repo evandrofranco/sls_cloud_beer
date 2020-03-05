@@ -10,8 +10,6 @@ Instalar o framework:
     
     npm install serverless
 
-    sls plugin install -n serverless-python-requirements
-
 Criar um virtualenv (Opcional)
 
 Rodar os pre-requisitos do Python:
@@ -33,6 +31,7 @@ Declarar as variáveis de ambiente das dependências (serão usadas para todos o
     export TABLE_NAME=<value>
     export AWS_PROFILE=<value>
     export TOKEN=<value>
+    export ALIAS=<nome-da-url-do-cloudfront>
 
 Primeiramente, criar as dependências gerais:
 

@@ -14,7 +14,7 @@ Resources:
               OriginAccessIdentity: !Join ['', ['origin-access-identity/cloudfront/', !Ref Cloudfrontoriginaccessidentity]]
         Enabled: 'true'
         Aliases:
-        - form.cloudbeer.com.br
+        - ${env:ALIAS}
         ViewerCertificate:
             AcmCertificateArn: ${env:CERTIFICATE_ARN}
             SslSupportMethod: sni-only
