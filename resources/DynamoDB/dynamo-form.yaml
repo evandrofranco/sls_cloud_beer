@@ -1,0 +1,31 @@
+Resources:
+  formTable:
+    Type: AWS::DynamoDB::Table
+    Properties:  
+      TableName: ${env:TABLE_NAME}
+      AttributeDefinitions:
+        - AttributeName: email
+          AttributeType: S
+        - AttributeName: name
+          AttributeType: S      
+      KeySchema:
+        - AttributeName: email
+          KeyType: HASH
+        - AttributeName: name
+          KeyType: RANGE  
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+           
+Outputs:
+  formTable:
+    Value:
+      Ref: formTable
+    Export: 
+      Name: formTableName
+
+  formTableARN:
+    Value:
+      "Fn::GetAtt": [ formTable, Arn ]
+    Export: 
+      Name: formTableARN

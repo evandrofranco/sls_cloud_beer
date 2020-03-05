@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>CloudBeer</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/noui/nouislider.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<!--===============================================================================================-->
+</head>
+
+<body>
+
+
+	<div class="container-contact100">
+		<div class="wrap-contact100">
+			<form class="contact100-form validate-form" id="form" method="post">
+				<span class="contact100-form-title">
+					<img src="images/CloudBeer.png" style="max-width: 100%" alt="CloudBeer Logo">
+					Pesquisa
+				</span>
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate="Please Type Your Name">
+					<span class="label-input100">Seu nome ou apelido</span>
+					<input type="text" id="name-input" placeholder="Digite o nome aqui..." class="form-control" /><br />
+				</div>
+
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100"
+					data-validate="Enter Your Email (e@a.x)">
+					<span class="label-input100">E-mail</span>
+					<input type="email" id="email-input" placeholder="Digite o e-mail aqui..." class="form-control" />
+				</div>
+
+				<div class="wrap-input100 input100-select bg1 rs1-wrap-input100">
+					<span class="label-input100">Qual seu nível de conhecimento em AWS?</span>
+					<div>
+						<select class="js-select2" name="knowledge" id="knowledge">
+							<option disabled selected value>Escolha uma Opção</option>
+							<option>Faixa Branca</option>
+							<option>Sei criar um EC2</option>
+							<option>Intermediário</option>
+							<option>Avançado</option>
+							<option>Jedi</option>
+							<option>Só o Jeff Barr sabe mais que eu</option>
+						</select>
+						<br />
+						<div class="dropDownSelect2"></div><br />
+					</div>
+				</div>
+
+				<div class="wrap-input100 input100-select bg1 rs1-wrap-input100">
+					<span class="label-input100">Como usa a AWS hoje?</span>
+					<div>
+						<select class="js-select2" name="usage" id="usage">
+							<option disabled selected value>Escolha uma Opção</option>
+							<option>Nunca vi, nem ouvi eu só ouço falar.</option>
+							<option>Faço alguns testes</option>
+							<option>"Administro" workloads importantes</option>
+							<option>"Administro" workloads críticos</option>
+						</select>
+						<br />
+						<div class="dropDownSelect2"></div><br />
+					</div>
+				</div>
+
+				<div class="wrap-input100 input100-select bg1 rs1-wrap-input100">
+					<span class="label-input100">Qual o seu background</span>
+					<div>
+						<select class="js-select2" name="background" id="background">
+							<option disabled selected value>Escolha uma Opção</option>
+							<option>Sei fazer: print('Hello World!')</option>
+							<option>Sou do time de Dev (dev Raiz, tela preta)</option>
+							<option>Sou do time que usa Mac (ok, sou designer)</option>
+							<option>Sou do time de Ops (Infra, /bin/bash)</option>
+							<option>Gerente</option>
+							<option>Executivo</option>
+							<option>Dados (ML, DB, IA e outras siglas bonitas)</option>
+							<option>N.D.A.</option>
+						</select>
+						<br />
+						<div class="dropDownSelect2"></div><br />
+					</div>
+				</div>
+
+				<div class="wrap-input100 input100-select bg1 rs1-wrap-input100">
+					<span class="label-input100">O que você achou do evento?</span>
+					<div>
+						<select class="js-select2" name="rate" id="rate">
+							<option disabled selected value>Escolha uma Opção</option>
+							<option>Melhor que o Re:invent</option>
+							<option>Melhor do que Vingadores!</option>
+							<option>Seriously!?</option>
+							<option>Aff, ainda tem que avaliar?</option>
+							<option>Não tinha outras opções, então to aqui.</option>
+							<option>Era melhor ter ido ver o filme do Pelé!</option>
+							<option>Indo embora Falow!</option>
+							<option>Cadê a cerveja?</option>
+						</select>
+						<br />
+						<div class="dropDownSelect2"></div><br />
+					</div>
+				</div>
+
+
+				<div class="wrap-input100 validate-input bg1" data-validate="Please Type Your Message">
+					<span class="label-input100">Deixe um Comentário!</span>
+					<textarea id="description-input" rows="3" placeholder="Digite sua mensagem..." class="form-control"
+						style="width:100%;"></textarea><br />
+				</div>
+
+				<div class="container-contact100-form-btn">
+					<button type="button" onClick="submitToAPI(event)" class="contact100-form-btn">
+						<span>
+							Enviar Avaliação
+							<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+						</span>
+					</button>
+				</div>
+			</form>
+			<div style="align-items: center;">
+				<span class="contact100-form-title">
+					<br />
+					Obrigado!
+				</span>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script type="text/javascript">
+		function submitToAPI(e) {
+			e.preventDefault();
+			var URL = "https://abc1234.execute-api.us-east-1.amazonaws.com/01/contact";
+
+			var Namere = /[A-Za-z]{1}[A-Za-z]/;
+			if (!Namere.test($("#name-input").val())) {
+				alert("Nome deve possuir mais de 2 caracteres");
+				return;
+			}
+			if ($("#email-input").val() == "") {
+				alert("Por favor digite seu e-mail");
+				return;
+			}
+
+			var reeamil = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,6})?$/;
+			if (!reeamil.test($("#email-input").val())) {
+				alert("Por favor digite um e-mail válido");
+				return;
+			}
+
+			if (!$("#knowledge").val()) {
+				alert('Por favor escolha uma valor para: "Qual seu nível de conhecimento em AWS?"');
+				return;
+			}
+
+			if (!$("#usage").val()) {
+				alert('Por favor escolha uma valor para: "Como usa a AWS hoje?"');
+				return;
+			}
+
+			if (!$("#background").val()) {
+				alert('Por favor escolha uma valor para: "Qual o seu background?"');
+				return;
+			}
+
+			if (!$("#rate").val()) {
+				alert('Por favor escolha uma valor para: "O que achou do evento?"');
+				return;
+			}
+
+			var name = $("#name-input").val();
+			var rate = $("#rate-input").val();
+			var email = $("#email-input").val();
+			var desc = $("#description-input").val();
+			var option_knowledge = $("#knowledge option:selected").text();
+			var option_usage = $("#usage option:selected").text();
+			var option_background = $("#background option:selected").text();
+			var option_rate = $("#rate option:selected").text();
+
+			var data = {
+				name: name,
+				rate: option_rate,
+				usage: option_usage,
+				knowledge: option_background,
+				experience: option_knowledge,
+				email: email,
+				comment: desc
+			};
+
+			$.ajax({
+				type: "POST",
+				url: "<COLOCAR_URL_DO_API_GW_AQUI>",
+				dataType: "json",
+				crossDomain: "true",
+				contentType: "application/json; charset=utf-8",
+				data: JSON.stringify(data),
+				headers: {
+					'Authorization': '<COLOCAR_TOKEN_AQUI>'
+				},
+
+				success: function () {
+					// clear form and show a success message
+					alert("Successo");
+					document.getElementById("form").reset();
+					location.reload();
+				},
+				error: function () {
+					// show an error message
+					alert("Erro");
+				}
+			});
+		}
+	</script>
+
+</body>
+
+</html>

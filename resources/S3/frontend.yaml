@@ -1,0 +1,61 @@
+Resources:
+  StaticSite:
+      Type: AWS::S3::Bucket
+      Properties:
+        AccessControl: PublicRead
+        BucketName: ${env:BUCKET_NAME}
+        WebsiteConfiguration:
+          IndexDocument: index.html
+  
+  StaticSiteS3BucketPolicy:
+    DependsOn:
+      - Cloudfrontoriginaccessidentity
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket:
+        Ref: StaticSite
+      PolicyDocument:
+        Statement:
+          - Sid: PublicReadGetObject
+            Effect: Allow
+            Principal:
+              AWS:
+                Fn::Join: [
+                  "", [
+                    "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity ",
+                    {
+                      "Ref": "Cloudfrontoriginaccessidentity"
+                    }
+                  ]
+                ] 
+            Action:
+            - s3:GetObject
+            Resource:
+              Fn::Join: [
+                "", [
+                  "arn:aws:s3:::",
+                  {
+                    "Ref": "StaticSite"
+                  },
+                  "/*"
+                ]
+              ]
+
+#Outputs:
+#  StaticSite:
+#    Value:
+#      Ref: StaticSite
+#    Export: 
+#      Name: StaticSiteName
+
+  #WebsiteURL:
+  #  Value:
+  #     "Fn::GetAtt": [ StaticSite, WebsiteURL ]
+  #  Export:
+  #    Name: StaticSiteURL
+
+  #S3BucketSecureURL:
+  #  Value:
+  #    "Fn::GetAtt" : [ StaticSite, DomainName ]
+  #  Export: 
+  #    Name: StaticSiteSecureURL

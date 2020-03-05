@@ -1,0 +1,47 @@
+service: sls-cloud-beer
+package:
+  individually: true
+  exclude:
+    - ./**
+
+provider:
+  name: aws
+  runtime: python3.8
+  memorySize: 128
+  timeout: 29
+  stage: v1
+  region: us-west-2
+  profile: ${env:AWS_PROFILE}
+  iamRoleStatements:
+  - Effect: Allow
+    Action:
+      - dynamodb:PutItem
+      - dynamodb:Query
+      - dynamodb:UpdateItem
+    Resource: 
+      - Fn::ImportValue: formTableARN
+
+# Lambda Functions Declaration
+functions:
+  form:
+    handler: src/form.handler
+    environment:
+      TOKEN: ${env:TOKEN}
+      TABLE_NAME: 
+        Fn::ImportValue: formTableName
+    events:
+      - http:
+          path: form
+          method: post
+          cors: true
+    package:
+      include:
+        - src/form.py
+
+# Static Site
+plugins:
+  - serverless-finch
+
+custom:
+  client:
+    bucketName: ${env:BUCKET_NAME}

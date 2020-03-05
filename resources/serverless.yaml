@@ -1,0 +1,18 @@
+service: sls-cloud-beer-resources
+
+provider:
+  name: aws
+  runtime: python3.8
+  memorySize: 128
+  timeout: 3
+  stage: v1
+  region: us-west-2
+  profile: ${env:AWS_PROFILE}
+
+resources:
+  # DynamoDB
+  - ${file(DynamoDB/dynamo-form.yaml)}
+  # S3
+  - ${file(S3/frontend.yaml)}
+  # Cloud Front Distribution
+  - ${file(CloudFront/distribution.yaml)}

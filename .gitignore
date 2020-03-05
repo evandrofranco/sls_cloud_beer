@@ -1,0 +1,14 @@
+#Serverless
+.serverless/
+resources/.serverless/
+
+#Node
+node_modules/
+package-lock.json
+package.json
+
+#Project
+.venv/
+.vscode/
+values
+.DS_Store

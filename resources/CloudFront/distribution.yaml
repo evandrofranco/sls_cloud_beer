@@ -1,0 +1,65 @@
+Resources:
+  WebAppCloudFrontDistribution:
+    DependsOn:
+      - StaticSite
+      - Cloudfrontoriginaccessidentity
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Origins:
+          - DomainName:
+              'Fn::GetAtt' : [ StaticSite, DomainName ]
+            Id: CloudBeerStaticSite
+            S3OriginConfig:
+              OriginAccessIdentity: !Join ['', ['origin-access-identity/cloudfront/', !Ref Cloudfrontoriginaccessidentity]]
+        Enabled: 'true'
+        Aliases:
+        - form.cloudbeer.com.br
+        ViewerCertificate:
+            AcmCertificateArn: ${env:CERTIFICATE_ARN}
+            SslSupportMethod: sni-only
+        #ViewerCertificate: # Se desejar usar certificado da AWS
+        #  CloudFrontDefaultCertificate: 'true'
+        DefaultRootObject: index.html
+        CustomErrorResponses:
+          - ErrorCode: 404
+            ResponseCode: 200
+            ResponsePagePath: /index.html
+        DefaultCacheBehavior:
+          AllowedMethods:
+            - DELETE
+            - GET
+            - HEAD
+            - OPTIONS
+            - PATCH
+            - POST
+            - PUT
+          ## The origin id defined above
+          TargetOriginId: CloudBeerStaticSite
+          ForwardedValues:
+            QueryString: 'false'
+            Cookies:
+              Forward: none
+          ViewerProtocolPolicy: redirect-to-https
+        #Logging: # Se desejado habilitar log
+        #  IncludeCookies: 'false'
+        #  Bucket: mylogs.s3.amazonaws.com
+        #  Prefix: myprefix
+
+  Cloudfrontoriginaccessidentity:
+    Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
+    Properties:
+      CloudFrontOriginAccessIdentityConfig:
+        Comment: "Identity"
+
+Outputs:
+  WebAppCloudFrontDistributionOutput:
+    Value:
+      'Fn::GetAtt': [ WebAppCloudFrontDistribution, DomainName ]
+
+  CloudfrontoriginaccessidentityOutput:
+    Value:
+      Ref: Cloudfrontoriginaccessidentity
+    Export: 
+      Name: CloudfrontoriginaccessidentityOutput
+    
